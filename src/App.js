@@ -1,28 +1,34 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import GoogleSignInButton from './containers/GoogleSignInButton';
+import { connect } from 'react-redux';
+import GoogleSignOutButton from './containers/GoogleSignOutButton';
 
 class App extends Component {
   render() {
+    console.log(this.props.firebase.auth);
+    let auth = this.props.firebase.auth;
+    let isEmpty = auth.isEmpty;
+    let photoURL = auth.photoURL || logo;
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
+          <img src={photoURL} className="App-logo" alt="logo" />
+          <p className="helloBox">
+            Hello World{!isEmpty ? ', ' + auth.displayName : '' }
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          {isEmpty ? <GoogleSignInButton/> : <GoogleSignOutButton/>}
         </header>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    firebase: state.firebase
+  }
+}
+
+export default connect(mapStateToProps)(App);
