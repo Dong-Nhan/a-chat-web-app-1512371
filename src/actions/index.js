@@ -1,4 +1,4 @@
-import { SIGN_IN_SUCCESS, SIGN_IN_FAIL } from "./actionTypes";
+import { SIGN_IN_SUCCESS, SIGN_IN_FAIL, CHOOSE_USER } from "./actionTypes";
 
 export const signInSuccess = () => {
   return {
@@ -30,5 +30,14 @@ export const signOut = function() {
   return (dispatch, getState, getFirebase) => {
     const firebase = getFirebase();
     firebase.logout();
+  }
+}
+
+//choose user to chat with
+export const chooseUser = function(userId) {
+  console.log(userId);
+  return {
+    type: CHOOSE_USER,
+    userId: userId
   }
 }

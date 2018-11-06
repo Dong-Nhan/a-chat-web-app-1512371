@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firebaseConnect } from "react-redux-firebase";
+import { Link } from "react-router-dom";
 
 import logo from '../logo.svg';
 
@@ -19,13 +20,16 @@ class HomePage extends Component {
       <div className="App">
         <header className="App-header">
           <img src={photoURL} className="App-logo" alt="logo" />
-          <p className="helloBox">
-            Hello World{!isEmpty ? ', ' + auth.displayName : ''}
-          </p>
-          <div>Your data: <code>
-            {JSON.stringify(this.props.firebase1.data)}
-          </code>
-          </div>
+          {
+            !isEmpty ?
+              <div className="helloBox">
+                Hello {', ' + auth.displayName}
+                <div>
+                  <Link to="/chat">go to chat</Link>
+                </div>
+              </div> : <div>Hello world</div>
+          }
+
           {isEmpty ? <GoogleSignInButton /> : <GoogleSignOutButton />}
         </header>
       </div>
@@ -41,5 +45,5 @@ const mapStateToProps = (state) => {
 
 export default compose(
   connect(mapStateToProps),
-  firebaseConnect(['arrays'])
+  firebaseConnect()
 )(HomePage)

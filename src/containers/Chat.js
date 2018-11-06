@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
+import { Switch, Route } from "react-router-dom";
 
 import './Chat.css';
+import NoOneToChat from "../components/NoOneToChat";
+
 import UserListContainer from './UserListContainer';
+import ChatBoxContainer from './ChatBoxContainer';
 import GoogleSignOutButton from './GoogleSignOutButton';
 import GoogleSignInButton from './GoogleSignInButton';
+import ChatInputContainer from './ChatInputContainer';
 
 class Chat extends Component {
   render() {
+    console.log(this.props.match);
     return (
       <div>
         <div className="container-fluid my-header">
@@ -21,8 +27,11 @@ class Chat extends Component {
             </div>
             <div className="col-9">
               <div className="row h-100">
-                <div className="col-12 h-75">Chatbox</div>
-                <div className="col-12 h-25">ChatInput</div>
+              <Switch>
+                <Route exact path="/chat/:id" component={({match}) => <ChatBoxContainer userId={match.params.id}/>}/>
+                <Route component={NoOneToChat} />
+              </Switch>
+                <ChatInputContainer />
               </div>
             </div>
           </div>
