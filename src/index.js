@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
 import rootReducer from './reducers';
 
@@ -27,7 +28,9 @@ firebase.initializeApp(firebaseConfig)
 
 // react-redux-firebase config
 const rrfConfig = {
-
+  userProfile: 'users',
+  presence: 'onlineUsers',
+  sessions: 'sessions'
 }
 
 

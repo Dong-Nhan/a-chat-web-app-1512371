@@ -15,14 +15,12 @@ export const signInFail = () => {
 export const signInWithGooggle = function() {
   return (dispatch, getState, getFirebase) => {
     const firebase = getFirebase()
-      
     firebase.login({
       provider: 'google',
       type: 'popup'
     }).then(() => {
       dispatch(signInSuccess());
     }, err => {
-      console.log(err);
       dispatch(signInFail());
     })
   }
