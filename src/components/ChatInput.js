@@ -14,7 +14,10 @@ export default class ChatInput extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    alert('submitted');
+    if (!this.state.chatMessage) return;
+    let from = this.props.myFirebase.auth.uid;
+    let to = this.props.userId;
+    this.props.sendMessage(from, to, this.state.chatMessage);
     this.setState(initialState);
   }
 
@@ -25,23 +28,31 @@ export default class ChatInput extends Component {
   }
 
   render() {
+    let users = this.props.users || {};
+    let userId = this.props.userId;
+    let flag;
+    if (users.hasOwnProperty(userId)) flag = true;
+    else flag = false;
     return (
-      <div className="col-12 h-25">
-        <form className="h-50" onSubmit={this.handleSubmit}>
-          <div className="form-row h-100">
-            <div className="col-9">
-              <textarea type="text" name="chatMessage"
-                className="form-control h-100"
-                value={this.state.chatMessage}
-                onChange={this.handleInputChange} />
+      flag ?
+        <div className="col-12 h-25">
+          <h2>ChatInput</h2>
+          <form className="h-50" onSubmit={this.handleSubmit}>
+            <div className="form-row h-100">
+              <div className="col-9">
+                <textarea type="text" name="chatMessage"
+                  className="form-control h-100"
+                  value={this.state.chatMessage}
+                  onChange={this.handleInputChange} />
+              </div>
+              <div className="col-3 d-flex align-items-center justify-content-center">
+                <button type="submit"
+                  className="btn btn-primary btn-lg w-75 h-75">Send</button>
+              </div>
             </div>
-            <div className="col-3 d-flex align-items-center justify-content-center">
-              <button type="submit"
-                className="btn btn-primary btn-lg w-75 h-75">Send</button>
-            </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
+        : null
     )
   }
 }

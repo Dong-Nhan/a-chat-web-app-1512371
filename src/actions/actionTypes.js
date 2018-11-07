@@ -3,4 +3,8 @@ export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAIL = 'SIGN_IN_FAIL';
 export const SIGN_OUT_WITH_GOOGLE = 'SIGN_OUT_WITH_GOOGLE';
 
-export const CHOOSE_USER = 'CHOOSE_USER';
+// export const CHOOSE_USER = 'CHOOSE_USER';
+// export const CHOOSE_USER_SUCCESS = 'CHOOSE_USER_SUCCESS';
+// export const CHOOSE_USER_FAIL = 'CHOOSE_USER_FAIL';
+
+export const SEND_MESSAGE = 'SEND_MESSAGE';

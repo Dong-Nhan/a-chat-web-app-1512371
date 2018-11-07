@@ -2,18 +2,27 @@ import ChatInput from '../components/ChatInput'
 import { connect } from 'react-redux'
 import { firebaseConnect } from 'react-redux-firebase'
 import { compose } from 'redux';
+import { sendMessage } from '../actions';
 
 const mapStateToProps = (state, ownProps) => {
   return {
     myFirebase: state.firebase,
-    users: state.firebase.ordered.users,
+    users: state.firebase.data.users,
     onlineUsers: state.firebase.data.onlineUsers,
     ...ownProps
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return {
+    sendMessage: (from, to, message) => {
+      dispatch(sendMessage(from, to, message))
+    }
+  }
+}
+
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   firebaseConnect(['users', 'onlineUsers'])
 )(ChatInput);
 

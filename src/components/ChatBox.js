@@ -1,15 +1,36 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import NoOneToChat from './NoOneToChat';
 
 export default class ChatBox extends Component {
-  componentWillMount() {
-    this.props.chooseUser(this.props.userId);
-  }
-
   render() {
+    let messageList = this.props.messageList;
+    let myId = this.props.myId;
     return (
-      <div className="col-12 h-75">
-        Chatbox
-      </div>
+      !this.props.noOneToChat ?
+        <div className="col-12 h-75">
+          <h2>ChatBox</h2>
+          <div className="chat-box-container">
+            {
+              Object.keys(messageList).map(key => {
+                if (messageList[key].from === myId) return (
+                  <div key={key} className="row my-2">
+                    <div className="col-7 offset-4 text-right">
+                      <span className="blue-message p-1 rounded">{messageList[key].message}</span>
+                    </div>
+                  </div>
+                )
+                else return (
+                  <div key={key} className="row my-3">
+                    <div className="col-7 offset-1">
+                      <span className="grey-message p-1 rounded">{messageList[key].message}</span>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>
+        : <NoOneToChat />
     )
   }
 }

@@ -11,8 +11,6 @@ import GoogleSignOutButton from './GoogleSignOutButton';
 
 class HomePage extends Component {
   render() {
-    console.log(JSON.stringify(this.props.firebase1.data));
-    console.log(this.props.firebase1);
     let auth = this.props.firebase1.auth;
     let isEmpty = auth.isEmpty;
     let photoURL = auth.photoURL || logo;

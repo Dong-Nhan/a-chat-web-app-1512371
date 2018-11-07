@@ -9,3 +9,18 @@
 .user-list {
   overflow: auto
 }
+
+.chat-box-container {
+  overflow: auto;
+  overflow-x: hidden;
+  height: 100%
+}
+
+.blue-message {
+  color: white;
+  background: #007bff;
+}
+
+.grey-message {
+  background: grey;
+}
