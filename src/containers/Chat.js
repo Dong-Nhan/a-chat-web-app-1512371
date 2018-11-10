@@ -12,7 +12,7 @@ class Chat extends Component {
   render() {
     return (
       <div>
-        <div className="container-fluid">
+        <div className="container-fluid my-header">
           <div className="row">
             <div className="col-6">
               <h2 className="align-self-start">Header</h2>
@@ -23,7 +23,7 @@ class Chat extends Component {
           </div>
         </div>
         <div className="container-fluid d-flex my-container">
-          <div className="row flex-fill">
+          <div className="row">
             <div className="col-3 user-list">
               <UserListContainer />
             </div>

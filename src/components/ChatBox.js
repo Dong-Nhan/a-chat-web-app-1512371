@@ -2,14 +2,25 @@ import React, { Component } from 'react';
 import NoOneToChat from './NoOneToChat';
 
 export default class ChatBox extends Component {
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom = () => {
+    this.messagesEnd && this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  }
   render() {
     let messageList = this.props.messageList;
     let myId = this.props.myId;
     return (
       !this.props.noOneToChat ?
-        <div className="col-12 h-75">
+        <div className="col-12 h-75 d-flex flex-column">
           <h2>ChatBox</h2>
-          <div className="chat-box-container">
+          <div className="chat-box-container flex-fill">
             {
               Object.keys(messageList).map(key => {
                 if (messageList[key].from === myId) return (
@@ -28,6 +39,9 @@ export default class ChatBox extends Component {
                 )
               })
             }
+            <div style={{ float: "left", clear: "both" }}
+              ref={(el) => { this.messagesEnd = el; }}>
+            </div>
           </div>
         </div>
         : <NoOneToChat />

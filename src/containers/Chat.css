@@ -1,19 +1,17 @@
 .my-header {
-  min-height: 10vh;
+  height: 10vh;
 }
 
 .my-container {
-  min-height: 90vh;
+  height: 90vh;
 }
 
 .user-list {
-  overflow: auto
+  overflow-x: hidden;
 }
 
 .chat-box-container {
-  overflow: auto;
   overflow-x: hidden;
-  height: 100%
 }
 
 .blue-message {
