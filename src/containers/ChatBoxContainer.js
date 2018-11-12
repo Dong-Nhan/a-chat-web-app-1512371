@@ -4,8 +4,6 @@ import { firebaseConnect } from 'react-redux-firebase'
 import { compose } from 'redux';
 import { calculateMessgeId } from '../utils';
 
-// function getMessageList(conversations, )
-
 const mapStateToProps = (state, ownProps) => {
   return {
     myFirebase: state.firebase,
@@ -28,21 +26,13 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // chooseUser: (userId) => {
-    //   dispatch(chooseUser(userId))
-    // },
-    // chooseUserSuccess: (userId) => {
-    //   dispatch(chooseUserSuccess(userId));
-    // },
-    // chooseUserFail: () => {
-    //   dispatch(chooseUserFail());
-    // }
+
   }
 }
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firebaseConnect(['users', 'onlineUsers', 'conversations'])
+  firebaseConnect(['users', 'onlineUsers', 'conversations']),
+  connect(mapStateToProps, mapDispatchToProps)
 )(ChatBox);
 
 

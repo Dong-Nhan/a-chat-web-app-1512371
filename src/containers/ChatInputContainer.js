@@ -22,8 +22,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firebaseConnect(['users', 'onlineUsers'])
+  firebaseConnect(['users', 'onlineUsers']),
+  connect(mapStateToProps, mapDispatchToProps)
 )(ChatInput);
 
 

@@ -8,3 +8,5 @@ export const SIGN_OUT_WITH_GOOGLE = 'SIGN_OUT_WITH_GOOGLE';
 // export const CHOOSE_USER_FAIL = 'CHOOSE_USER_FAIL';
 
 export const SEND_MESSAGE = 'SEND_MESSAGE';
+
+export const SET_SEARCH_TERM = 'SET_SEARCH_TERM';

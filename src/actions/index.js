@@ -1,4 +1,4 @@
-import { SIGN_IN_SUCCESS, SIGN_IN_FAIL } from "./actionTypes";
+import { SIGN_IN_SUCCESS, SIGN_IN_FAIL, SET_SEARCH_TERM } from "./actionTypes";
 import { calculateMessgeId } from "../utils";
 
 export const signInSuccess = () => {
@@ -34,32 +34,12 @@ export const signOut = function () {
   }
 }
 
-
-// export const chooseUserSuccess = function (userId) {
-//   console.log(userId, 'in chooseUserSuccess');
-//   return {
-//     type: CHOOSE_USER_SUCCESS,
-//     userId: userId
-//   }
-// }
-
-// export const chooseUserFail = function () {
-//   return {
-//     type: CHOOSE_USER_FAIL
-//   }
-// }
-
-// //choose user to chat with
-// export const chooseUser = function (userId) {
-//   console.log('chooseUser');
-//   return (dispatch, getState) => {
-//     //check if userId is valid
-//     let myFirebase = getState().firebase;
-//     let users = myFirebase.data.users || {};
-//     if (users.hasOwnProperty(userId)) dispatch(chooseUserSuccess(userId));
-//     else dispatch(chooseUserFail());
-//   }
-// }
+export const setSearchTerm = function(term) {
+  return {
+    type: SET_SEARCH_TERM,
+    term: term
+  }
+}
 
 export const sendMessage = function (from, to, message) {
   let data = {
