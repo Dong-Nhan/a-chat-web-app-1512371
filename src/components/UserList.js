@@ -4,11 +4,12 @@ import SearchBox from './SearchBox';
 
 export default class UserList extends Component {
   render() {
+    // console.log(this.props.users)
     let users = this.props.users;
     let onlineUsers = this.props.onlineUsers || {};
-    let usersList = null;
+    let usersListToDisplay = null;
     if (users) {
-      usersList = users.map(item => {
+      usersListToDisplay = users.map(item => {
         return (
           <Link to={`/chat/${item.key}`} key={item.key}>
             <div className="row mb-3">
@@ -34,7 +35,7 @@ export default class UserList extends Component {
           <SearchBox searchTerm={this.props.searchTerm} setSearchTerm={this.props.setSearchTerm}/>
         </div>
         <div className="col-12">
-          {usersList}
+          {usersListToDisplay}
         </div>
       </div>
     )

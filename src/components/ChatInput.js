@@ -17,7 +17,7 @@ export default class ChatInput extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (!this.state.chatMessage) return; //nothing to send
-    let from = this.props.myFirebase.auth.uid;
+    let from = this.props.myId;
     let to = this.props.userId;
     this.props.sendMessage(from, to, this.state.chatMessage);
     this.setState(initialState);

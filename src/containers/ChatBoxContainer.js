@@ -6,7 +6,6 @@ import { calculateMessgeId } from '../utils';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    myFirebase: state.firebase,
     myId: state.firebase.auth.uid,
     noOneToChat: (() => {
       let users = state.firebase.data.users || {};

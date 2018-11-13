@@ -8,7 +8,7 @@ import { NORMAL_MESSAGE, URL_MESSAGE } from '../constants';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    myFirebase: state.firebase,
+    myId: state.firebase.auth.uid,
     users: state.firebase.data.users,
     onlineUsers: state.firebase.data.onlineUsers,
     ...ownProps

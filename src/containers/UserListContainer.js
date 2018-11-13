@@ -4,10 +4,17 @@ import { firebaseConnect } from 'react-redux-firebase'
 import { compose } from 'redux';
 import { setSearchTerm } from '../actions';
 
+const filterUsers = function (users, searchTerm) {
+  if (!users || !searchTerm) return users;
+  //filter user has dislpayName matchs searchTerm
+  return users.filter(function (user) {
+    return user.value.displayName.indexOf(searchTerm) !== -1;
+  })
+}
+
 const mapStateToProps = (state) => {
   return {
-    myFirebase: state.firebase,
-    users: state.firebase.ordered.users,
+    users: filterUsers(state.firebase.ordered.users, state.searchTerm),
     onlineUsers: state.firebase.data.onlineUsers,
     searchTerm: state.searchTerm
   }
