@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { ENTER_KEY_CODE } from '../constants';
 
 const initialState = {
   chatMessage: ''
@@ -10,6 +11,7 @@ export default class ChatInput extends Component {
     this.state = initialState;
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   handleSubmit(e) {
@@ -25,6 +27,13 @@ export default class ChatInput extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  handleKeyDown(e) {
+    //user press Enter
+    if (e.keyCode === ENTER_KEY_CODE && e.shiftKey === false) {
+      this.handleSubmit(e);
+    }
   }
 
   render() {
@@ -43,7 +52,8 @@ export default class ChatInput extends Component {
                 <textarea type="text" name="chatMessage"
                   className="form-control h-100"
                   value={this.state.chatMessage}
-                  onChange={this.handleInputChange} />
+                  onChange={this.handleInputChange}
+                  onKeyDown={this.handleKeyDown} />
               </div>
               <div className="col-3 d-flex align-items-center justify-content-center">
                 <button type="submit"
