@@ -55,8 +55,9 @@ export const sendMessage = function (from, to, message, type = NORMAL_MESSAGE) {
   console.log(data, messageId);
   return (dispatch, getState, getFirebase) => {
     let firebase = getFirebase();
-    let ref = firebase.database().ref('/conversations/' + messageId);
-    ref.push(data);
+    firebase.push('/conversations/' + messageId, data);
+    //modify last conversation timestamp
+    firebase.set(`/users/${from}/lastConversations/${to}`, Date.now());
   }
 }
 

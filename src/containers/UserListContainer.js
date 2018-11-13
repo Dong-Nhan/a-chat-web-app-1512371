@@ -16,21 +16,38 @@ const filterUsers = function (users, searchTerm) {
 const sortUsers = function (users, onlineUsers, myId) {
   if (!users) return users;
   onlineUsers = onlineUsers || {};
-  return users.map((user) => {
+  let usersRefined = users.map((user) => {
+    let myAccount = _.find(users, (user) => {
+      return user.key === myId;
+    })
+
     //add online status
     let isOnline = onlineUsers.hasOwnProperty(user.key);
     user.value.isOnline = isOnline;
 
-    // add isStarred status
-    let myAccount = _.find(users, (user) => {
-      return user.key === myId;
-    })
+    //add isStarred status
     let myStars = myAccount.value.myStars;
     let isStarred = (myStars && myStars.hasOwnProperty(user.key)) ? myStars[user.key] : false;
     user.value.isStarred = isStarred;
 
+    //add lastConversation timestamp
+    let myLastConversations = myAccount.value.lastConversations;
+    let lastConversation = (myLastConversations && myLastConversations.hasOwnProperty(user.key)) ? myLastConversations[user.key] : 0;
+    user.value.lastConversation = lastConversation;
+
     return user;
   })
+
+  //final sorting
+  let vipUsers = usersRefined.filter((item) => item.value.isOnline && item.value.isStarred); 
+  let theOthers = usersRefined.filter((item) => !(item.value.isOnline && item.value.isStarred));
+  
+  let sortFields = ['value.lastConversation', 'value.displayName'];
+  let sortOrders = ['desc', 'asc'];
+  
+  let results = _.concat(_.orderBy(vipUsers, sortFields, sortOrders), _.orderBy(theOthers, sortFields, sortOrders))
+  
+  return results;
 }
 
 const mapStateToProps = (state) => {
