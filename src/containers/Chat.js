@@ -23,7 +23,7 @@ class Chat extends Component {
           </div>
         </div>
         <div className="container-fluid d-flex my-container">
-          <div className="row">
+          <div className="row w-100">
             <div className="col-3 user-list">
               <UserListContainer />
             </div>
