@@ -16,9 +16,22 @@
 
 .blue-message {
   color: white;
-  background: #007bff;
+  background: #0084ff;
 }
 
 .grey-message {
-  background: grey;
+  background: #f1f0f0;
+}
+
+.is-online {
+  color: #19d243;
+}
+
+.is-offline {
+  color: indianred;
+}
+
+/* starred user */
+.checked {
+  color: orange;
 }

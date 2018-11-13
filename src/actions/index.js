@@ -31,11 +31,12 @@ export const signInWithGooggle = function () {
 export const signOut = function () {
   return (dispatch, getState, getFirebase) => {
     const firebase = getFirebase();
+    firebase.remove('onlineUsers/' + getState().firebase.auth.uid);
     firebase.logout();
   }
 }
 
-export const setSearchTerm = function(term) {
+export const setSearchTerm = function (term) {
   return {
     type: SET_SEARCH_TERM,
     term: term
@@ -56,5 +57,17 @@ export const sendMessage = function (from, to, message, type = NORMAL_MESSAGE) {
     let firebase = getFirebase();
     let ref = firebase.database().ref('/conversations/' + messageId);
     ref.push(data);
+  }
+}
+
+export const starUser = function (userId) {
+  return (dispatch, getState, getFirebase) => {
+    const firebase = getFirebase();
+    const myId = getState().firebase.auth.uid;
+    const myStarPath = `users/${myId}/myStars/${userId}`;
+    firebase.database().ref(myStarPath).once('value', (snapshot) => {
+      if (!snapshot.val()) firebase.set(myStarPath, true); //first time
+      else firebase.set(myStarPath, !snapshot.val());
+    });
   }
 }

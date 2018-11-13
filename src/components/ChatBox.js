@@ -6,15 +6,21 @@ import { URL_MESSAGE, NORMAL_MESSAGE } from '../constants';
 const messageListToDisplayFactory = function (messageList, myId) {
   let result = Object.keys(messageList).map(key => {
     let messageContent = null;
+    let isMyMessage = messageList[key].from === myId;
 
     //detect message type to display properly
     switch (messageList[key].type) {
       case URL_MESSAGE:
-        messageContent = <MicrolinkCard url={messageList[key].message} />;
+        messageContent = (
+          <MicrolinkCard className={isMyMessage ? "ml-auto" : ""}
+            url={messageList[key].message} />);
         break;
       case NORMAL_MESSAGE:
       default:
-        messageContent = <span className="blue-message p-1 rounded">{messageList[key].message}</span>;
+        messageContent = (
+          <span className={isMyMessage ? "blue-message p-1 rounded" : "grey-message p-1 rounded"}>
+            {messageList[key].message}
+          </span>);
     }
 
     //align messages to be left or right
