@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { firebaseConnect } from 'react-redux-firebase'
 import { compose } from 'redux';
 import { sendMessage } from '../actions';
+import { isValidURL } from '../utils';
+import { NORMAL_MESSAGE, URL_MESSAGE } from '../constants';
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -16,7 +18,9 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     sendMessage: (from, to, message) => {
-      dispatch(sendMessage(from, to, message))
+      let type = NORMAL_MESSAGE;
+      if (isValidURL(message)) type = URL_MESSAGE;
+      dispatch(sendMessage(from, to, message, type))
     }
   }
 }

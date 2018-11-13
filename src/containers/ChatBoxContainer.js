@@ -17,6 +17,7 @@ const mapStateToProps = (state, ownProps) => {
     messageList: (() => {
       let conversations = state.firebase.data.conversations;
       let messageId = calculateMessgeId(state.firebase.auth.uid, ownProps.userId);
+      //check for new conversation
       if (conversations && conversations[messageId]) return conversations[messageId];
       else return {};
     })(),

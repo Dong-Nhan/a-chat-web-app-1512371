@@ -1,5 +1,6 @@
 import { SIGN_IN_SUCCESS, SIGN_IN_FAIL, SET_SEARCH_TERM } from "./actionTypes";
 import { calculateMessgeId } from "../utils";
+import { NORMAL_MESSAGE } from "../constants";
 
 export const signInSuccess = () => {
   return {
@@ -41,10 +42,11 @@ export const setSearchTerm = function(term) {
   }
 }
 
-export const sendMessage = function (from, to, message) {
+export const sendMessage = function (from, to, message, type = NORMAL_MESSAGE) {
   let data = {
     from,
     to,
+    type,
     message,
     time: Date.now()
   }
@@ -54,13 +56,5 @@ export const sendMessage = function (from, to, message) {
     let firebase = getFirebase();
     let ref = firebase.database().ref('/conversations/' + messageId);
     ref.push(data);
-    // ref.once('value').then(function (snapshot) {
-    //   // let messageList = snapshot.val();
-    //   // if (!messageList) ref.push([data]); //create new one
-    //   // else {
-    //   //   messageList.push(data);
-    //   //   ref.set(messageList);
-    //   // }
-    // })
   }
 }
